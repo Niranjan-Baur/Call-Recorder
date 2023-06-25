@@ -16,48 +16,44 @@
 
 package com.example.callrecorder.ui.callrecorder
 
-import com.example.callrecorder.ui.theme.MyApplicationTheme
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.material3.Button
-import androidx.compose.material3.Text
-import androidx.compose.material3.TextField
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
+import androidx.compose.material3.FloatingActionButton
+import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.navigation.compose.rememberNavController
 import com.example.callrecorder.ui.components.HomePageContactCard
+import com.example.callrecorder.ui.theme.MyApplicationTheme
 
 @Composable
 fun CallRecorderScreen(modifier: Modifier = Modifier, viewModel: CallRecorderViewModel = hiltViewModel()) {
     val items by viewModel.uiState.collectAsStateWithLifecycle()
     if (items is CallRecorderUiState.Success) {
-        CallRecorderScreen(
-            items = (items as CallRecorderUiState.Success).data,
-            onSave = viewModel::addCallRecorder,
-            modifier = modifier
-        )
+        CallRecorderScreen(items = (items as CallRecorderUiState.Success).data, onSave = viewModel::addCallRecorder, modifier = modifier)
     }
 }
 
 @Composable
 internal fun CallRecorderScreen(
-    items: List<String>,
-    onSave: (name: String) -> Unit,
-    modifier: Modifier = Modifier
+        items: List<String>,
+        onSave: (name: String) -> Unit,
+        modifier: Modifier = Modifier,
 ) {
+//    val navController = rememberNavController()
+
 //    Column(modifier) {
 //        var nameCallRecorder by remember { mutableStateOf("Compose") }
 //        Row(
@@ -78,13 +74,27 @@ internal fun CallRecorderScreen(
 //        }
 //    }
 
-    val contacts = mapOf<String,String>("Jojo" to "123" , "Pinky" to "456","Maa" to "789" , "Baba" to "753")
+    val contacts = mapOf("Jojo" to "123", "Pinky" to "456", "Maa" to "789", "Baba" to "753")
 
-    LazyColumn() {
-        contacts.forEach { entry ->
+    Column(
+            modifier = Modifier.padding(6.dp),
+
+            ) {
+        LazyColumn {
+            contacts.forEach { entry ->
 //            print("${entry.key} : ${entry.value}")
-            item{
-                HomePageContactCard(name = entry.key, mobileNumber = entry.value)
+                item {
+                    HomePageContactCard(name = entry.key, mobileNumber = entry.value)
+                }
+            }
+
+        }
+        Column(
+                modifier = Modifier.fillMaxWidth().fillMaxHeight(),
+                horizontalAlignment = Alignment.End,
+                verticalArrangement = Arrangement.Bottom) {
+            FloatingActionButton(modifier = Modifier.padding(10.dp), onClick = {  }) {
+                Icon(Icons.Filled.Add, "")
             }
         }
 

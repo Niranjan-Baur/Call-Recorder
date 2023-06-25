@@ -31,7 +31,7 @@ fun HomePageContactCard(name : String, mobileNumber : String){
         modifier = Modifier
             .fillMaxWidth()
             .clip(RoundedCornerShape(10.dp))
-            .background(Color(0xFF556C65)),
+            .background(Color(0xFFCCFFAA)),
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically) {
         Row(modifier= Modifier
@@ -40,16 +40,7 @@ fun HomePageContactCard(name : String, mobileNumber : String){
             horizontalArrangement = Arrangement.spacedBy(20.dp),
             verticalAlignment = Alignment.CenterVertically) {
 
-            Row (
-                modifier = Modifier
-                    .size(50.dp)
-                    .clip(CircleShape)
-                    .background(Color(0xFF9CCC65)),
-                horizontalArrangement = Arrangement.Center,
-                verticalAlignment = Alignment.CenterVertically
-                ){
-                Text(text="MD")
-            }
+            CircleProfile()
 
             Column(modifier = Modifier.height(50.dp),verticalArrangement = Arrangement.SpaceEvenly) {
                 Text(text= name , style = MaterialTheme.typography.bodyLarge)
@@ -62,6 +53,21 @@ fun HomePageContactCard(name : String, mobileNumber : String){
     }
     Spacer(modifier = Modifier.padding(10.dp))
 }
+
+@Composable
+fun CircleProfile(){
+    Row (
+            modifier = Modifier
+                    .size(50.dp)
+                    .clip(CircleShape)
+                    .background(Color(0xFF9CCC65)),
+            horizontalArrangement = Arrangement.Center,
+            verticalAlignment = Alignment.CenterVertically
+    ){
+        Text(text="MD")
+    }
+}
+
 
 @Preview(showBackground = true)
 @Composable
