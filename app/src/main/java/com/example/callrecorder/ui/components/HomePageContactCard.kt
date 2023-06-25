@@ -1,8 +1,6 @@
 package com.example.callrecorder.ui.components
 
-import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -22,21 +20,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.googlefonts.GoogleFont
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.callrecorder.R
 
 @Composable
 fun HomePageContactCard(name : String, mobileNumber : String){
-
-//    val fontName = GoogleFont("Nunito")
-
-//    val provider = GoogleFont.Provider(
-//        providerAuthority = "com.google.android.gms.fonts",
-//        providerPackage = "com.google.android.gms",
-//        certificates = R.array.com_google_android_gms_fonts_certs
-//    )
 
     Row(
         modifier = Modifier
