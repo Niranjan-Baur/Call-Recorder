@@ -21,7 +21,7 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 
 @Composable
-fun ContactAddPage(navController: NavController) {
+fun ContactAddPage() {
 
     var name by remember {
         mutableStateOf("")
@@ -53,7 +53,7 @@ fun ContactAddPage(navController: NavController) {
                 label = { Text(text = "Enter the mobile number") }
         )
         Button(onClick = {
-            navController.navigate("profilePage")
+//            navController.navigate("profilePage")
         }) {
             Text(text = "Save Contact")
         }
@@ -64,5 +64,5 @@ fun ContactAddPage(navController: NavController) {
 @Composable
 @Preview
 fun ContactAddPagePreview() {
-    ContactAddPage(navController = rememberNavController())
+    ContactAddPage()
 }

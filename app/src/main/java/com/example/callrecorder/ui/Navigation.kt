@@ -24,13 +24,16 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.callrecorder.ui.callrecorder.CallRecorderScreen
+import com.example.callrecorder.ui.pages.ContactAddPage
 
 @Composable
-fun MainNavigation() {
-    val navController = rememberNavController()
+    fun MainNavigation() {
+        val navController = rememberNavController()
 
-    NavHost(navController = navController, startDestination = "main") {
-        composable("main") { CallRecorderScreen(modifier = Modifier.padding(16.dp)) }
-        // TODO: Add more destinations
+        NavHost(navController = navController, startDestination = "main") {
+            composable("main") { CallRecorderScreen(modifier = Modifier.padding(16.dp),navController=navController) }
+            composable("addContactPage"){
+               ContactAddPage()
+            }
+        }
     }
-}

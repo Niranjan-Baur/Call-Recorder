@@ -25,7 +25,8 @@ import kotlinx.coroutines.flow.Flow
 
 @Entity
 data class CallRecorder(
-    val name: String
+    val name: String,
+    val phoneNumber : String
 ) {
     @PrimaryKey(autoGenerate = true)
     var uid: Int = 0

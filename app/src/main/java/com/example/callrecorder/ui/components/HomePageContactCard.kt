@@ -1,6 +1,7 @@
 package com.example.callrecorder.ui.components
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -22,16 +23,21 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 import com.example.callrecorder.R
 
 @Composable
-fun HomePageContactCard(name : String, mobileNumber : String){
+fun HomePageContactCard(name : String, mobileNumber : String, navController: NavHostController){
 
     Row(
         modifier = Modifier
             .fillMaxWidth()
             .clip(RoundedCornerShape(10.dp))
-            .background(Color(0xFFCCFFAA)),
+            .background(Color(0xFFCCFFAA))
+            .clickable {
+                navController.navigate("addContactPage")
+            },
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically) {
         Row(modifier= Modifier
@@ -58,9 +64,9 @@ fun HomePageContactCard(name : String, mobileNumber : String){
 fun CircleProfile(){
     Row (
             modifier = Modifier
-                    .size(50.dp)
-                    .clip(CircleShape)
-                    .background(Color(0xFF9CCC65)),
+                .size(50.dp)
+                .clip(CircleShape)
+                .background(Color(0xFF9CCC65)),
             horizontalArrangement = Arrangement.Center,
             verticalAlignment = Alignment.CenterVertically
     ){
@@ -72,5 +78,5 @@ fun CircleProfile(){
 @Preview(showBackground = true)
 @Composable
 fun DefaultPreview(){
-    HomePageContactCard("Pallabi Saha","+91 9163567268")
+    HomePageContactCard("Pallabi Saha","+91 9163567268", navController = rememberNavController())
 }

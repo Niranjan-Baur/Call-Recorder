@@ -34,15 +34,17 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.navigation.NavController
+import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.example.callrecorder.ui.components.HomePageContactCard
 import com.example.callrecorder.ui.theme.MyApplicationTheme
 
 @Composable
-fun CallRecorderScreen(modifier: Modifier = Modifier, viewModel: CallRecorderViewModel = hiltViewModel()) {
+fun CallRecorderScreen(modifier: Modifier = Modifier, viewModel: CallRecorderViewModel = hiltViewModel(),navController: NavHostController) {
     val items by viewModel.uiState.collectAsStateWithLifecycle()
     if (items is CallRecorderUiState.Success) {
-        CallRecorderScreen(items = (items as CallRecorderUiState.Success).data, onSave = viewModel::addCallRecorder, modifier = modifier)
+        CallRecorderScreen(items = (items as CallRecorderUiState.Success).data, onSave = viewModel::addCallRecorder, modifier = modifier,navController)
     }
 }
 
@@ -51,7 +53,9 @@ internal fun CallRecorderScreen(
         items: List<String>,
         onSave: (name: String) -> Unit,
         modifier: Modifier = Modifier,
+        navController: NavHostController
 ) {
+
 //    val navController = rememberNavController()
 
 //    Column(modifier) {
@@ -84,16 +88,18 @@ internal fun CallRecorderScreen(
             contacts.forEach { entry ->
 //            print("${entry.key} : ${entry.value}")
                 item {
-                    HomePageContactCard(name = entry.key, mobileNumber = entry.value)
+                    HomePageContactCard(name = entry.key, mobileNumber = entry.value,navController)
                 }
             }
 
         }
         Column(
-                modifier = Modifier.fillMaxWidth().fillMaxHeight(),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .fillMaxHeight(),
                 horizontalAlignment = Alignment.End,
                 verticalArrangement = Arrangement.Bottom) {
-            FloatingActionButton(modifier = Modifier.padding(10.dp), onClick = {  }) {
+            FloatingActionButton(modifier = Modifier.padding(10.dp), onClick = { navController.navigate("addContactPage") }) {
                 Icon(Icons.Filled.Add, "")
             }
         }
@@ -107,7 +113,7 @@ internal fun CallRecorderScreen(
 @Composable
 private fun DefaultPreview() {
     MyApplicationTheme {
-        CallRecorderScreen(listOf("Compose", "Room", "Kotlin"), onSave = {})
+        CallRecorderScreen(listOf("Compose", "Room", "Kotlin"), onSave = {}, navController = rememberNavController())
 //        CallRecorderScreen()
     }
 }
@@ -116,7 +122,7 @@ private fun DefaultPreview() {
 @Composable
 private fun PortraitPreview() {
     MyApplicationTheme {
-        CallRecorderScreen(listOf("Compose", "Room", "Kotlin"), onSave = {})
+        CallRecorderScreen(listOf("Compose", "Room", "Kotlin"), onSave = {}, navController = rememberNavController())
 //        CallRecorderScreen()
     }
 
